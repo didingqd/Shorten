@@ -180,14 +180,14 @@ function addUrlToList(shortUrl, longUrl) {
 // button event
 function clearLocalStorage() {
   localStorage.clear()
-  alert("Record deleted.");
+  alert("记录已清除");
 }
 
 // button event
 function deleteShortUrl(delKeyPhrase) {
   // 按钮
   document.getElementById("delBtn-" + delKeyPhrase).disabled = true;
-  document.getElementById("delBtn-" + delKeyPhrase).innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>';
+  document.getElementById("delBtn-" + delKeyPhrase).innerHTML = '<span class="spinner-border spinner-border-sm" role="status">清除记录</span>';
 
   // 从KV中删除
   fetch(window.location.pathname, {
