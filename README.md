@@ -1,5 +1,5 @@
-# URL Shortener
-
+# URL Shortener（汉化）
+## [源项目](https://github.com/Url-Shorten-Worker)
 English | [简体中文](doc/README_zh-hans.md)
 
 ![Demo](doc/Demo.png)
