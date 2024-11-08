@@ -4,12 +4,12 @@ let passwordText = document.querySelector("#passwordText").value
 
 function shorturl() {
   if (document.querySelector("#longURL").value == "") {
-    alert("URL不能为空")
+    alert("URL cannot be empty!")
     return
   }
 
   document.getElementById("addBtn").disabled = true;
-  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 执行中...';
+  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Shortening...';
   fetch(window.location.pathname, {
       method: 'POST',
       headers: {
@@ -27,7 +27,7 @@ function shorturl() {
     .then(function(myJson) {
       res = myJson;
       document.getElementById("addBtn").disabled = false;
-      document.getElementById("addBtn").innerHTML = '执行';
+      document.getElementById("addBtn").innerHTML = 'Shorten it';
 
       // 成功生成短链
       if (res.status == "200") {
@@ -46,10 +46,10 @@ function shorturl() {
       $('#resultModal').modal('show')
 
     }).catch(function(err) {
-      alert("未知错误，请重试");
+      alert("Unknow error. Please retry!");
       console.log(err);
       document.getElementById("addBtn").disabled = false;
-      document.getElementById("addBtn").innerHTML = '执行';
+      document.getElementById("addBtn").innerHTML = 'Shorten it';
     })
 }
 
@@ -78,9 +78,9 @@ function copyurl(id, attr) {
     window.getSelection().addRange(range);
     document.execCommand('copy');
     window.getSelection().removeAllRanges();
-    console.log('复制成功')
+    console.log('Copy success')
   } catch (e) {
-    console.log('复制错误')
+    console.log('Copy error')
   }
 
   if (attr) {
@@ -140,7 +140,7 @@ function reloadUrlList() {
       addUrlToList(keyShortURL, valueLongURL)
     }
   }
-  alert("记录已加载");
+  alert("Record loaded.");
 }
 
 function addUrlToList(shortUrl, longUrl) {
@@ -180,14 +180,14 @@ function addUrlToList(shortUrl, longUrl) {
 // button event
 function clearLocalStorage() {
   localStorage.clear()
-  alert("记录已清除");
+  alert("Record deleted.");
 }
 
 // button event
 function deleteShortUrl(delKeyPhrase) {
   // 按钮
   document.getElementById("delBtn-" + delKeyPhrase).disabled = true;
-  document.getElementById("delBtn-" + delKeyPhrase).innerHTML = '<span class="spinner-border spinner-border-sm" role="status">清除记录</span>';
+  document.getElementById("delBtn-" + delKeyPhrase).innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>';
 
   // 从KV中删除
   fetch(window.location.pathname, {
@@ -214,7 +214,7 @@ function deleteShortUrl(delKeyPhrase) {
         // 加载localStorage
         loadUrlList()
 
-        document.getElementById("result").innerHTML = "删除成功。"
+        document.getElementById("result").innerHTML = "Delete Successful."
       } else {
         document.getElementById("delBtn-").disabled = false;
         document.getElementById("delBtn-").innerHTML = '✘';
@@ -226,14 +226,14 @@ function deleteShortUrl(delKeyPhrase) {
     }).catch(function(err) {
       document.getElementById("delBtn-").disabled = false;
       document.getElementById("delBtn-").innerHTML = '✘';
-      alert("未知错误，请重试");
+      alert("Unknow error. Please retry!");
       console.log(err);
     })
 }
 
 function loadKV() {
   document.getElementById("loadKV2localStgBtn").disabled = true;
-  document.getElementById("loadKV2localStgBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 下载中...';
+  document.getElementById("loadKV2localStgBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Downloading...';
   // 从KV中查询, cmd为 "qryall", 查询全部
   fetch(window.location.pathname, {
     method: 'POST',
@@ -268,11 +268,11 @@ function loadKV() {
       modal.show();
     }
   }).catch(function(err) {
-    alert("未知错误，请重试");
+    alert("Unknow error. Please retry!");
     console.log(err);
   }).finally(function() {
     document.getElementById("loadKV2localStgBtn").disabled = false;
-    document.getElementById("loadKV2localStgBtn").innerHTML = '下载记录';
+    document.getElementById("loadKV2localStgBtn").innerHTML = 'Download records';
   });
 }
 
