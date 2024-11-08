@@ -4,12 +4,12 @@ let passwordText = document.querySelector("#passwordText").value
 
 function shorturl() {
   if (document.querySelector("#longURL").value == "") {
-    alert("URL cannot be empty!")
+    alert("URL不能为空")
     return
   }
 
   document.getElementById("addBtn").disabled = true;
-  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Shortening...';
+  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 执行中...';
   fetch(window.location.pathname, {
       method: 'POST',
       headers: {
@@ -49,7 +49,7 @@ function shorturl() {
       alert("Unknow error. Please retry!");
       console.log(err);
       document.getElementById("addBtn").disabled = false;
-      document.getElementById("addBtn").innerHTML = 'Shorten it';
+      document.getElementById("addBtn").innerHTML = '执行';
     })
 }
 
@@ -140,7 +140,7 @@ function reloadUrlList() {
       addUrlToList(keyShortURL, valueLongURL)
     }
   }
-  alert("Record loaded.");
+  alert("记录已加载");
 }
 
 function addUrlToList(shortUrl, longUrl) {
@@ -180,7 +180,7 @@ function addUrlToList(shortUrl, longUrl) {
 // button event
 function clearLocalStorage() {
   localStorage.clear()
-  alert("Record deleted.");
+  alert("记录已删除");
 }
 
 // button event
@@ -214,7 +214,7 @@ function deleteShortUrl(delKeyPhrase) {
         // 加载localStorage
         loadUrlList()
 
-        document.getElementById("result").innerHTML = "Delete Successful."
+        document.getElementById("result").innerHTML = "删除成功"
       } else {
         document.getElementById("delBtn-").disabled = false;
         document.getElementById("delBtn-").innerHTML = '✘';
@@ -226,14 +226,14 @@ function deleteShortUrl(delKeyPhrase) {
     }).catch(function(err) {
       document.getElementById("delBtn-").disabled = false;
       document.getElementById("delBtn-").innerHTML = '✘';
-      alert("Unknow error. Please retry!");
+      alert("未知错误，请重试！");
       console.log(err);
     })
 }
 
 function loadKV() {
   document.getElementById("loadKV2localStgBtn").disabled = true;
-  document.getElementById("loadKV2localStgBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Downloading...';
+  document.getElementById("loadKV2localStgBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 下载中...';
   // 从KV中查询, cmd为 "qryall", 查询全部
   fetch(window.location.pathname, {
     method: 'POST',
@@ -259,7 +259,7 @@ function loadKV() {
         // save to localStorage
         localStorage.setItem(keyPhrase, valueLongURL);
       });
-      alert("Record downloaded.");
+      alert("记录已加载");
       location.reload();
     } else {
       document.getElementById("result").innerHTML = res.error;
@@ -268,11 +268,11 @@ function loadKV() {
       modal.show();
     }
   }).catch(function(err) {
-    alert("Unknow error. Please retry!");
+    alert("未知错误，请重试！");
     console.log(err);
   }).finally(function() {
     document.getElementById("loadKV2localStgBtn").disabled = false;
-    document.getElementById("loadKV2localStgBtn").innerHTML = 'Download records';
+    document.getElementById("loadKV2localStgBtn").innerHTML = '下载记录';
   });
 }
 
