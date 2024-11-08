@@ -152,23 +152,23 @@ async function handleRequest(request) {
       }
       if (user === 1) {
         if (!await checkURL(req_url)) {
-          return new Response(`{"status":500,"key": "", "error":"Error: URL illegal."}`, {
+          return new Response(`{"status":500,"key": "", "error":"错误：URL 非法。"}`, {
             headers: response_header,
           })
         }
         if (req_url.indexOf(url_exclude) != -1) {
-          return new Response(`{"status":500,"key": "", "error":"Error: URL illegal."}`, {
+          return new Response(`{"status":500,"key": "", "error":"错误：URL 非法。"}`, {
             headers: response_header,
           })
         }
         // req_keyPhrase containing symbol.
         if (req_keyPhrase && !/^[a-zA-Z0-9]+$/.test(req_keyPhrase)) {
-          return new Response(`{"status":500,"key": "", "error":"Error: Custom short URL illegal."}`, {
+          return new Response(`{"status":500,"key": "", "error":"错误：自定义短 URL 非法。"}`, {
             headers: response_header,
           })
         }
         if (req_keyPhLen < len_limit && req_keyPhLen > 0) {
-          return new Response(`{"status":500,"key": "", "error":"Error: Custom short URL is too short."}`, {
+          return new Response(`{"status":500,"key": "", "error":"错误：自定义短 URL 太短。"}`, {
             headers: response_header,
           })
         }
@@ -179,7 +179,7 @@ async function handleRequest(request) {
       if (custom_link == "true" && (req_keyPhrase != "")) {
         let is_exist = await LINKS.get(req_keyPhrase)
         if (is_exist != null && user <= 1) {
-          return new Response(`{"status":500,"key": "", "error":"Error: Custom short URL is not available."}`, {
+          return new Response(`{"status":500,"key": "", "error":"错误：该自定义短 URL 不可用。"}`, {
             headers: response_header,
           })
         } else {
@@ -208,7 +208,7 @@ async function handleRequest(request) {
           headers: response_header,
         })
       } else {
-        return new Response(`{"status":500, "key": "", "error":"Error: Reach the KV write limitation."}`, {
+        return new Response(`{"status":500, "key": "", "error":"错误：达到 KV 写入限制。"}`, {
           headers: response_header,
         })
       }
@@ -218,7 +218,7 @@ async function handleRequest(request) {
       let req_keyPhrase = req["keyPhrase"]
 
       if (user == 0) {
-        return new Response(`{"status":500,"key": "", "error":"Error: Invalid password."}`, {
+        return new Response(`{"status":500,"key": "", "error":"错误：密码无效。"}`, {
           headers: response_header,
         })
       }
@@ -231,7 +231,7 @@ async function handleRequest(request) {
       // Load all KV records.
     } else if (req_cmd == "qryall") {
       if (user !== 10) {
-        return new Response(`{"status":500, "error":"Error: Invalid password."}`, {
+        return new Response(`{"status":500, "error":"错误：密码无效。"}`, {
           headers: response_header,
         })
       }
@@ -257,7 +257,7 @@ async function handleRequest(request) {
           headers: response_header,
         })
       } else {
-        return new Response(`{"status":500, "error":"Error: Download records failed."}`, {
+        return new Response(`{"status":500, "error":"错误：下载记录失败。"}`, {
           headers: response_header,
         })
       }
@@ -281,7 +281,7 @@ async function handleRequest(request) {
 
   // Admin user homepage.
   if (password_value_admin && path == password_value_admin) {
-    let index = await fetch("https://cdn.jsdelivr.net/gh/Monopink/Url-Shorten-Worker" + repo_version + "/" + theme_admin + "/index.html")
+    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/Shorten_URL" + repo_version + "/" + theme_admin + "/index.html")
     index = await index.text()
     index = index.replaceAll(/__REPO_VERSION__/gm, repo_version)
     index = index.replaceAll(/__PASSWORD__/gm, path)
@@ -294,7 +294,7 @@ async function handleRequest(request) {
 
   // Guest user homepage.
   if ((!path && !password_value) || path == password_value) {
-    let index = await fetch("https://cdn.jsdelivr.net/gh/Monopink/Url-Shorten-Worker" + repo_version + "/" + theme + "/index.html")
+    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/Shorten_URL" + repo_version + "/" + theme + "/index.html")
     index = await index.text()
     index = index.replaceAll(/__REPO_VERSION__/gm, repo_version)
     index = index.replaceAll(/__PASSWORD__/gm, path)
@@ -342,7 +342,7 @@ async function handleRequest(request) {
 
   if (location) {
     if (no_ref == "true") {
-      let no_ref = await fetch("https://Monopink.github.io/Url-Shorten-Worker/no-ref.html")
+      let no_ref = await fetch("https://didingqd.github.io/Url-Shorten-Worker/no-ref.html")
       no_ref = await no_ref.text()
       no_ref = no_ref.replace(/{Replace}/gm, location)
       return new Response(no_ref, {
