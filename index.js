@@ -281,7 +281,7 @@ async function handleRequest(request) {
 
   // Admin user homepage.
   if (password_value_admin && path == password_value_admin) {
-    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/URL_Shorten" + repo_version + "/" + theme_admin + "/index.html")
+    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/URL_Short" + repo_version + "/" + theme_admin + "/index.html")
     index = await index.text()
     index = index.replaceAll(/__REPO_VERSION__/gm, repo_version)
     index = index.replaceAll(/__PASSWORD__/gm, path)
@@ -294,7 +294,7 @@ async function handleRequest(request) {
 
   // Guest user homepage.
   if ((!path && !password_value) || path == password_value) {
-    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/URL_Shorten" + repo_version + "/" + theme + "/index.html")
+    let index = await fetch("https://cdn.jsdelivr.net/gh/didingqd/URL_Short" + repo_version + "/" + theme + "/index.html")
     index = await index.text()
     index = index.replaceAll(/__REPO_VERSION__/gm, repo_version)
     index = index.replaceAll(/__PASSWORD__/gm, path)
@@ -342,7 +342,7 @@ async function handleRequest(request) {
 
   if (location) {
     if (no_ref == "true") {
-      let no_ref = await fetch("https://didingqd.github.io/URL_Shorten/no-ref.html")
+      let no_ref = await fetch("https://didingqd.github.io/URL_Short/no-ref.html")
       no_ref = await no_ref.text()
       no_ref = no_ref.replace(/{Replace}/gm, location)
       return new Response(no_ref, {
