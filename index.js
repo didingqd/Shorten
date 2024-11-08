@@ -342,7 +342,7 @@ async function handleRequest(request) {
 
   if (location) {
     if (no_ref == "true") {
-      let no_ref = await fetch("https://didingqd.github.io/Url-Shorten-Worker/no-ref.html")
+      let no_ref = await fetch("https://didingqd.github.io/Shorten_URL/no-ref.html")
       no_ref = await no_ref.text()
       no_ref = no_ref.replace(/{Replace}/gm, location)
       return new Response(no_ref, {
